@@ -16,8 +16,8 @@ public class GreitaveikosTyrimas {
     private final Semaphore semaphore = new Semaphore(-1);
     private final Timekeeper tk;
 
-    private final String[] TYRIMU_VARDAI = {"add0.25", "rem0.25", "get0.25"};
-    private final int[] TIRIAMI_KIEKIAI = {10000, 20000, 40000, 80000};
+    private final String[] TYRIMU_VARDAI = {"add", "rem", "get", "cont", "sort"};
+    private final int[] TIRIAMI_KIEKIAI = {100000, 200000, 400000, 800000};
 
     private final UnrolledLinkedListADT<Kompiuteris> komp1 = new UnrolledLinkedList<Kompiuteris>(100);
     private final UnrolledLinkedListADT<Kompiuteris> komp2 = new UnrolledLinkedList<Kompiuteris>(100);
@@ -41,7 +41,7 @@ public class GreitaveikosTyrimas {
     public void SisteminisTyrimas() throws InterruptedException {
         try {
             chainsSizes.add("Greitaveika");
-            chainsSizes.add("   kiekis      " + TYRIMU_VARDAI[0] + "   " + TYRIMU_VARDAI[1]);
+            chainsSizes.add("   kiekis      " + TYRIMU_VARDAI[0] + "   " + TYRIMU_VARDAI[1] + "   " + TYRIMU_VARDAI[2] + "   " + TYRIMU_VARDAI[3]);
             for (int k : TIRIAMI_KIEKIAI) {
                 Kompiuteris[] autoArray = KompGamyba.gamintiKompiuterius(k);
                 komp1.clear();
@@ -58,16 +58,24 @@ public class GreitaveikosTyrimas {
                 for (int i = 0; i < k; i++) {
                     komp2.add(autoArray[i]);
                 }
-                for (int i = 0; i < k-1; i++) {
+                for (int i = 0; i < k - 1; i++) {
                     komp1.remove(i);
                 }
                 tk.finish(TYRIMU_VARDAI[1]);
 
 
-                for (int i = 0; i < k-1; i++) {
+                for (int i = 0; i < k - 1; i++) {
                     komp2.get(i);
                 }
                 tk.finish(TYRIMU_VARDAI[2]);
+
+                for (int i = 0; i < k - 1; i++) {
+                    komp2.contains(autoArray[i]);
+                }
+                tk.finish(TYRIMU_VARDAI[3]);
+
+                komp2.sort(Kompiuteris.pagalKaina);
+                tk.finish(TYRIMU_VARDAI[4]);
                 tk.seriesFinish();
             }
 

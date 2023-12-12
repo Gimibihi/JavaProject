@@ -12,28 +12,31 @@ public class Main {
             ULL.add(arrayKomp[i]);
             k.add(arrayKomp[i]);
         }
-        System.out.println(ULL.get(1).toString());
-        System.out.println(ULL.get(2).toString());
-        System.out.println(ULL.get(3).toString());
-        System.out.println(ULL.get(4).toString());
+        System.out.println("Pradiniai duomenys:");
+        for(int i=0;i<10;i++) {
+            System.out.println(ULL.get(i).toString());
+        }
+        System.out.println("Iterpiam elementa i 5 vieta:");
         ULL.insert(arrayKomp[4],4);
         System.out.println(ULL.get(4).toString());
-        System.out.println(ULL.get(10).toString());
-        System.out.println(ULL.get(11).toString());
-        System.out.println(ULL.get(12).toString());
-        System.out.println(ULL.get(9999).toString());
+
+        System.out.println("Surikiuojam duomenis:");
         ULL.sort(Kompiuteris.pagalGamintoja);
-        System.out.println("Surikiuotas");
-        System.out.println(ULL.get(1).toString());
-        System.out.println(ULL.get(2).toString());
-        System.out.println(ULL.get(3).toString());
-        System.out.println(ULL.get(4).toString());
-        System.out.println(ULL.get(10).toString());
-        System.out.println(ULL.get(11).toString());
-        System.out.println(ULL.get(12).toString());
+        for(int i=0;i<10;i++) {
+            System.out.println(ULL.get(i).toString());
+        }
+        System.out.println("Panaikiname 9 elementa:");
+        ULL.remove(8);
+        System.out.println(8);
+
+        System.out.println("Patikriname ar tuscias sarasas:");
+        System.out.println(ULL.isEmpty());
+        System.out.println("Istustiname sarasa:");
         ULL.clear();
+
+
         GreitaveikosTyrimas gt = new GreitaveikosTyrimas();
-        
+
         new Thread(() -> {
             try {
                 String result;
@@ -46,7 +49,7 @@ public class Main {
                 Thread.currentThread().interrupt();
             }
             gt.getSemaphore().release();
-            
+
         }, "Greitaveikos_rezultatu_gija").start();
 
         //Šioje gijoje atliekamas greitaveikos tyrimas
